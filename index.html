@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>localhost cafe</title>
+  <meta name="description" content="localhost cafe. Coming soon." />
+  <meta name="theme-color" content="#300A24" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="localhost cafe" />
+  <meta property="og:description" content="Coming soon." />
+  <meta property="og:url" content="https://thelocalhost.cafe" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="localhost cafe" />
+  <meta name="twitter:description" content="Coming soon." />
+
+  <!-- Favicon: "lh" in Ubuntu Mono on Ubuntu terminal purple -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="%23300A24"/><text x="50%25" y="50%25" dy=".35em" text-anchor="middle" font-family="Ubuntu Mono, ui-monospace, Menlo, Consolas, monospace" font-weight="700" font-size="38" fill="%23EEEEEC">lh</text></svg>'
+  />
+
+  <!-- Ubuntu Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #300A24;
+      --fg: #EEEEEC;
+      --muted: #8a7a83;
+      --user: #8AE234;   /* Ubuntu bold green */
+      --path: #729FCF;   /* Ubuntu bold blue  */
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Ubuntu Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
+      padding: 2rem 1.25rem;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      text-align: left;
+    }
+
+    .logo {
+      font-size: clamp(1.25rem, 7vw, 4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .user { color: var(--user); }
+    .path { color: var(--path); }
+    .sep,
+    .dollar { color: var(--fg); }
+
+    .cursor {
+      display: inline-block;
+      margin-left: 0.05em;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .comment {
+      color: var(--muted);
+      font-size: clamp(0.9rem, 2.2vw, 1.15rem);
+      margin-left: 0.25rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding-top: 2rem;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px dashed transparent;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    footer a:hover,
+    footer a:focus-visible {
+      color: var(--fg);
+      border-bottom-color: var(--fg);
+      outline: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="logo" aria-label="localhost">
+      <span class="user">localhost@eskişehir</span><span class="sep">:</span><span class="path">~</span><span class="dollar">$</span>&nbsp;<span class="cursor" aria-hidden="true">█</span>
+    </div>
+    <div class="comment">// coming soon</div>
+  </main>
+
+  <footer>
+    <a href="mailto:info@thelocalhost.cafe">info@thelocalhost.cafe</a>
+  </footer>
+</body>
+</html>
