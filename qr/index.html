@@ -167,23 +167,30 @@
       -webkit-user-select: all;
     }
     .wifi button {
-      font-family: inherit;
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: inherit;
       color: var(--link);
       background: transparent;
-      border: 1px solid var(--link);
-      border-radius: 8px;
-      padding: 0.45rem 0.9rem;
-      min-height: 44px;
+      border: none;
+      padding: 0;
       cursor: pointer;
       display: none; /* shown by JS if clipboard is available */
+      align-items: center;
+      justify-content: center;
     }
-    .wifi button:active { color: var(--fg); border-color: var(--fg); }
-    .wifi button.copied {
-      color: var(--user);
-      border-color: var(--user);
+    .wifi button svg {
+      width: 1em;
+      height: 1em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
+    .wifi button .icon-check { display: none; }
+    .wifi button.copied .icon-copy { display: none; }
+    .wifi button.copied .icon-check { display: block; }
+    .wifi button:active { color: var(--fg); }
+    .wifi button.copied { color: var(--user); }
 
     .warning {
       font-size: 1.05rem;
@@ -232,7 +239,10 @@
         <div class="pass-row">
           <span>Password:</span>
           <code id="wifi-pass">Localhost.26</code>
-          <button id="copy-btn" type="button">kopyala</button>
+          <button id="copy-btn" type="button" aria-label="kopyala" title="kopyala">
+            <svg class="icon-copy" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icon-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          </button>
         </div>
       </div>
 
@@ -256,15 +266,13 @@
       var pass = document.getElementById('wifi-pass');
       if (!btn || !pass) return;
       if (!(navigator.clipboard && navigator.clipboard.writeText)) return;
-      btn.style.display = 'inline-block';
+      btn.style.display = 'inline-flex';
       var timer = null;
       btn.addEventListener('click', function () {
         navigator.clipboard.writeText(pass.textContent).then(function () {
-          btn.textContent = 'kopyalandı ✓';
           btn.classList.add('copied');
           if (timer) clearTimeout(timer);
           timer = setTimeout(function () {
-            btn.textContent = 'kopyala';
             btn.classList.remove('copied');
           }, 2000);
         }).catch(function () {
