@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>localhost cafe — menü &amp; sipariş</title>
+  <meta name="description" content="localhost cafe: menü, WiFi bilgileri ve sipariş." />
+  <meta name="theme-color" content="#300A24" />
+  <meta name="robots" content="noindex" />
+
+  <!-- Favicon: "lh" in Ubuntu Mono on Ubuntu terminal purple -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="%23300A24"/><text x="50%25" y="50%25" dy=".35em" text-anchor="middle" font-family="Ubuntu Mono, ui-monospace, Menlo, Consolas, monospace" font-weight="700" font-size="38" fill="%238AE234">lh</text></svg>'
+  />
+
+  <!-- Ubuntu Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --fg: #EEEEEC;
+      --muted: #8a7a83;
+      --user: #8AE234;   /* Ubuntu bold green */
+      --path: #3465A4;   /* Ubuntu Tango blue */
+      --link: #729FCF;
+      --accent: #E95420; /* Ubuntu orange */
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #240718;
+      color: var(--fg);
+      font-family: "Ubuntu Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(130% 100% at 50% -15%, #431638 0%, #2b0a20 48%, #1a0511 100%);
+      padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1rem, 5vw, 2rem);
+    }
+
+    .prompt {
+      font-size: clamp(1rem, 4.2vw, 1.3rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .prompt .user { color: var(--user); }
+    .prompt .path { color: var(--path); }
+
+    .cursor {
+      display: inline-block;
+      margin-left: 1ch;
+      animation: lh-blink 1.05s steps(1) infinite;
+    }
+    @keyframes lh-blink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cursor { animation: none !important; }
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(1.25rem, 4vw, 2rem);
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: clamp(1.5rem, 5vw, 3rem) 0;
+    }
+
+    /* Big action buttons */
+    a.btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      width: 100%;
+      min-height: 4.5rem;
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      text-decoration: none;
+      text-align: center;
+      border: 2px solid transparent;
+    }
+    a.btn .label {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    a.btn .sub {
+      font-size: 1rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+    a.btn .ext {
+      width: 0.7em;
+      height: 0.7em;
+      margin-left: 0.5ch;
+      opacity: 0.85;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vertical-align: -0.08em;
+    }
+
+    a.btn-menu {
+      background: rgba(138, 226, 52, 0.12);
+      border-color: var(--user);
+      color: var(--user);
+    }
+    a.btn-menu:active { background: rgba(138, 226, 52, 0.25); }
+    a.btn-menu .sub { color: var(--fg); }
+
+    a.btn-order {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    a.btn-order:active { background: #c7411a; }
+
+    /* WiFi block */
+    .wifi {
+      border: 1px dashed rgba(238, 238, 236, 0.35);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .wifi .ssid {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .wifi .pass-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem 0.8rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .wifi code {
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      color: inherit;
+      user-select: all;
+      -webkit-user-select: all;
+    }
+    .wifi button {
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--link);
+      background: transparent;
+      border: 1px solid var(--link);
+      border-radius: 8px;
+      padding: 0.45rem 0.9rem;
+      min-height: 44px;
+      cursor: pointer;
+      display: none; /* shown by JS if clipboard is available */
+    }
+    .wifi button:active { color: var(--fg); border-color: var(--fg); }
+    .wifi button.copied {
+      color: var(--user);
+      border-color: var(--user);
+    }
+
+    .warning {
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: var(--fg);
+      text-align: center;
+      text-wrap: pretty;
+      margin: 0;
+    }
+    .warning .hl { color: var(--accent); font-weight: 700; }
+
+    .warning.dim { color: var(--muted); }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding-top: 1rem;
+    }
+    footer a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+    footer a:hover { color: var(--fg); }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <div class="prompt">
+        <span class="user">localhost@qr</span><span>:</span><span class="path">~</span><span>$</span><span class="cursor" aria-hidden="true">█</span>
+      </div>
+    </header>
+
+    <main>
+      <!-- 1. Menu: works for everyone, on or off WiFi -->
+      <a class="btn btn-menu" href="https://qr-menu.simprasuite.com/localhost/1">
+        <span class="label">MENÜ<svg class="ext" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></span>
+      </a>
+
+      <!-- 2. WiFi info + warning: static, always visible. No reachability checks. -->
+      <div class="wifi">
+        <p class="warning">
+          <span class="hl">SİPARİŞ</span> butonunu kullanmak için
+          kafe ağına bağlanın
+        </p>
+        <div class="ssid">SSID: localhost cafe</div>
+        <div class="pass-row">
+          <span>Password:</span>
+          <code id="wifi-pass">Localhost.26</code>
+          <button id="copy-btn" type="button">kopyala</button>
+        </div>
+      </div>
+
+      <!-- 4. Order: plain anchor, always enabled, exact http:// URL -->
+      <a class="btn btn-order" href="http://172.16.0.2/">
+        <span class="label">SİPARİŞ<svg class="ext" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></span>
+      </a>
+
+      <p class="warning dim">veya siparişinizi ekibe söyleyin</p>
+    </main>
+
+    <footer>
+      <a href="/">thelocalhost.cafe</a>
+    </footer>
+
+  </div>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('copy-btn');
+      var pass = document.getElementById('wifi-pass');
+      if (!btn || !pass) return;
+      if (!(navigator.clipboard && navigator.clipboard.writeText)) return;
+      btn.style.display = 'inline-block';
+      var timer = null;
+      btn.addEventListener('click', function () {
+        navigator.clipboard.writeText(pass.textContent).then(function () {
+          btn.textContent = 'kopyalandı ✓';
+          btn.classList.add('copied');
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(function () {
+            btn.textContent = 'kopyala';
+            btn.classList.remove('copied');
+          }, 2000);
+        }).catch(function () {
+          /* Clipboard failed: password stays visible and selectable. */
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
