@@ -99,6 +99,34 @@
       gap: 1.4rem;
       align-items: center;
     }
+    .nav-links {
+      display: flex;
+      gap: 1.6rem;
+      align-items: center;
+      margin-right: 0.6rem;
+    }
+    .socials .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5ch;
+      background: var(--accent);
+      color: var(--fg);
+      font-weight: 700;
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      line-height: 1;
+      padding: 0.5em 1em;
+      border-radius: 999px;
+    }
+    .socials .nav-links a:hover {
+      background: var(--user);
+      color: #240718;
+    }
+    .nav-links a svg {
+      width: 1em;
+      height: 1em;
+      fill: currentColor;
+      display: block;
+    }
     .socials a {
       color: var(--muted);
       display: inline-flex;
@@ -188,6 +216,12 @@
         <span class="user">localhost@eskişehir</span><span>:</span><span class="path">~</span><span>$</span><span class="cursor" aria-hidden="true">█</span>
       </div>
       <nav class="socials">
+        <div class="nav-links">
+          <a href="https://thelocalhost.cafe/qr" target="_blank" rel="noopener noreferrer">
+            QR Menü
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg>
+          </a>
+        </div>
         <a href="https://x.com/localhostcafe" target="_blank" rel="noopener noreferrer" aria-label="X">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
