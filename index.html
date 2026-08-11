@@ -194,6 +194,13 @@
     .order-modal .modal-actions a.confirm {
       background: var(--accent);
       color: var(--fg);
+      gap: 0.5ch;
+    }
+    .order-modal .modal-actions a.confirm svg {
+      width: 1em;
+      height: 1em;
+      fill: currentColor;
+      display: block;
     }
     .order-modal .modal-actions a.confirm:hover {
       background: var(--user);
@@ -318,10 +325,7 @@
             QR Menü
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg>
           </a>
-          <a href="http://172.16.0.2/" id="order-link" class="ghost">
-            Sipariş
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg>
-          </a>
+          <a href="http://172.16.0.2/" id="order-link" class="ghost">Sipariş</a>
         </div>
         <!--
         <a href="https://x.com/localhostcafe" target="_blank" rel="noopener noreferrer" aria-label="X">
@@ -381,7 +385,7 @@
       </div>
     </div>
     <div class="modal-actions">
-      <a class="confirm" href="http://172.16.0.2/" target="_blank" rel="noopener noreferrer" id="order-confirm">Bağlandım</a>
+      <a class="confirm" href="http://172.16.0.2/" target="_blank" rel="noopener noreferrer" id="order-confirm">Bağlandım <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg></a>
     </div>
   </dialog>
 
