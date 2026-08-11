@@ -142,9 +142,11 @@
       display: inline-flex;
     }
     .socials a:hover { color: var(--user); }
+    /* Match the pill buttons' height: their font is clamp(0.95rem, 1.8vw, 1.1rem)
+       with 0.5em vertical padding on each side, i.e. 2em of that font size. */
     .socials svg {
-      width: clamp(1.15rem, 2.2vw, 1.5rem);
-      height: clamp(1.15rem, 2.2vw, 1.5rem);
+      width: clamp(1.9rem, 3.6vw, 2.2rem);
+      height: clamp(1.9rem, 3.6vw, 2.2rem);
       fill: currentColor;
       display: block;
     }
