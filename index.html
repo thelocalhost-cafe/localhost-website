@@ -68,7 +68,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       gap: 1rem;
       max-width: 1000px;
       width: 100%;
@@ -76,6 +76,9 @@
     }
 
     .prompt {
+      max-width: 1000px;
+      width: 100%;
+      margin: clamp(1rem, 2.5vw, 1.75rem) auto 0;
       font-size: clamp(1.15rem, 2vw, 1.35rem);
       font-weight: 700;
       letter-spacing: -0.01em;
@@ -142,6 +145,12 @@
        so scale it up slightly to match their visual weight. */
     .socials a.mail svg { transform: scale(1.18); }
 
+    @media (max-width: 420px) {
+      .socials { gap: 0.9rem; flex-wrap: wrap; justify-content: flex-end; }
+      .nav-links { margin-right: 0.2rem; }
+      .socials .nav-links a { padding: 0.45em 0.75em; }
+    }
+
     main {
       flex: 1;
       display: flex;
@@ -151,7 +160,7 @@
       max-width: 1000px;
       width: 100%;
       margin: 0 auto;
-      padding: clamp(2.5rem, 7vw, 5rem) 0;
+      padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(2.5rem, 7vw, 5rem);
     }
 
     .copy {
@@ -212,9 +221,6 @@
   <div class="page">
 
     <header>
-      <div class="prompt">
-        <span class="user">localhost@eskişehir</span><span>:</span><span class="path">~</span><span>$</span><span class="cursor" aria-hidden="true">█</span>
-      </div>
       <nav class="socials">
         <div class="nav-links">
           <a href="https://thelocalhost.cafe/qr" target="_blank" rel="noopener noreferrer">
@@ -239,6 +245,10 @@
         </a>
       </nav>
     </header>
+
+    <div class="prompt">
+      <span class="user">localhost@eskişehir</span><span>:</span><span class="path">~</span><span>$</span><span class="cursor" aria-hidden="true">█</span>
+    </div>
 
     <main>
       <div class="copy">
