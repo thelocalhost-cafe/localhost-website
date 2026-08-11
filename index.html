@@ -230,12 +230,16 @@
       display: inline-flex;
     }
     .order-modal .copy-btn:hover { color: var(--fg); }
-    /* Suppress the default focus ring for taps/clicks; keep it for keyboard. */
+    /* Suppress the default focus ring for taps/clicks; keep it for keyboard.
+       Some touch browsers match :focus-visible on tap, so only show the ring
+       on devices with a fine pointer (mouse/trackpad + likely a keyboard). */
     .order-modal .copy-btn:focus { outline: none; }
-    .order-modal .copy-btn:focus-visible {
-      outline: 2px solid var(--user);
-      outline-offset: 2px;
-      border-radius: 4px;
+    @media (pointer: fine) {
+      .order-modal .copy-btn:focus-visible {
+        outline: 2px solid var(--user);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
     }
     .order-modal .copy-btn.copied { color: var(--user); }
     .order-modal .copy-btn svg {
