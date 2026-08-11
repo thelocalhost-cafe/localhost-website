@@ -230,6 +230,13 @@
       display: inline-flex;
     }
     .order-modal .copy-btn:hover { color: var(--fg); }
+    /* Suppress the default focus ring for taps/clicks; keep it for keyboard. */
+    .order-modal .copy-btn:focus { outline: none; }
+    .order-modal .copy-btn:focus-visible {
+      outline: 2px solid var(--user);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
     .order-modal .copy-btn.copied { color: var(--user); }
     .order-modal .copy-btn svg {
       width: 1.05em;
