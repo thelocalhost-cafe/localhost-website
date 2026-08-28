@@ -70,7 +70,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      max-width: 1000px;
+      max-width: var(--shell, 1000px);
       width: 100%;
       margin: 0 auto;
     }
@@ -283,6 +283,53 @@
     }
     .lede.dim { color: var(--muted); }
 
+    .events {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.9rem, 2vw, 1.25rem);
+    }
+    .events h2 {
+      margin: 0;
+      font-size: clamp(1.1rem, 2.4vw, 1.7rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--accent);
+    }
+    .events iframe {
+      display: block;
+      width: 100%;
+      max-width: 600px;
+      height: 450px;
+      border: 1px solid #bfcbda88;
+      border-radius: 4px;
+      background: #240718;
+    }
+
+    /* Laptop and up: put the calendar beside the copy instead of below it.
+       main becomes a 2-col grid; .info spans the full width underneath. */
+    @media (min-width: 1180px) {
+      /* Shell is sized to the content: 560 text + 56 gap + 440 calendar.
+         A wider cap just inflates the gap between the columns. The header
+         reads --shell so it stays aligned with main. */
+      :root { --shell: 1056px; }
+      main {
+        display: grid;
+        max-width: 1056px;
+        /* Measured: the copy's natural line is ~516px at full headline
+           size, so 560px holds it without squeezing. Must be px, not ch —
+           `ch` here resolves against main's font, not the copy's. */
+        grid-template-columns: 560px 440px;
+        justify-content: start;
+        align-content: center;
+        align-items: start;
+        column-gap: 56px;
+        row-gap: clamp(2rem, 4vw, 3rem);
+      }
+      .events { grid-column: 2; }
+      .events iframe { width: 440px; }
+      .info { grid-column: 1 / -1; }
+    }
+
     .info {
       display: flex;
       flex-wrap: wrap;
@@ -370,6 +417,22 @@
         <p class="lede">localhost'ta hızlı wifi, rahat koltuklar ve aynı dünyadan bir ekip, benzer işler yapan insanları bir araya getiriyor.</p>
         <p class="lede dim">İstersen kulaklığını tak, kendi işine dal; istersen iki çift laf edip kafa dağıt.</p>
       </div>
+
+      <section class="events">
+        <h2>Etkinlikler</h2>
+        <iframe
+          src="https://luma.com/embed/calendar/cal-ArBxzcg315VmGSw/events"
+          width="600"
+          height="450"
+          frameborder="0"
+          style="border: 1px solid #bfcbda88; border-radius: 4px;"
+          allowfullscreen=""
+          aria-hidden="false"
+          tabindex="0"
+          title="localhost cafe etkinlik takvimi"
+          loading="lazy"
+        ></iframe>
+      </section>
 
       <div class="info">
         <div class="details">
