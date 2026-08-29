@@ -295,6 +295,23 @@
       letter-spacing: -0.01em;
       color: var(--accent);
     }
+    .events h2 a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(138, 226, 52, 0.45);
+    }
+    .events h2 a:hover,
+    .events h2 a:focus-visible { text-decoration-color: currentColor; }
+    .events h2 a svg {
+      width: 0.72em;
+      height: 0.72em;
+      fill: currentColor;
+      display: inline-block;
+      vertical-align: 0.02em;
+      margin-left: 0.35ch;
+    }
     .events iframe {
       display: block;
       width: 100%;
@@ -419,7 +436,7 @@
       </div>
 
       <section class="events">
-        <h2>Etkinlikler</h2>
+        <h2><a href="https://luma.com/localhost-cafe" target="_blank" rel="noopener noreferrer">Etkinlikler<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg></a></h2>
         <iframe
           src="https://luma.com/embed/calendar/cal-ArBxzcg315VmGSw/events?lt=dark"
           width="600"
