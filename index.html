@@ -246,6 +246,12 @@
       }
     }
     .order-modal .copy-btn.copied { color: var(--user); }
+    .order-modal .copy-error {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--accent);
+    }
+    .order-modal .copy-error[hidden] { display: none; }
     .order-modal .copy-btn svg {
       width: 1.3em;
       height: 1.3em;
@@ -482,6 +488,7 @@
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
         </button>
       </div>
+      <p class="copy-error" id="copy-error" role="alert" hidden>Kopyalama başarısız, şifreyi elle giriniz.</p>
     </div>
     <div class="modal-actions">
       <a class="confirm" href="http://172.16.0.2/" target="_blank" rel="noopener noreferrer" id="order-confirm">Bağlandım <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg></a>
@@ -499,9 +506,21 @@
       var copyBtn = document.getElementById("copy-pass");
       var copyIcon = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>';
       var checkIcon = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+      var copyError = document.getElementById("copy-error");
       var copyTimer;
+      function showCopyError() {
+        copyError.hidden = false;
+      }
       copyBtn.addEventListener("click", function () {
-        navigator.clipboard.writeText(document.getElementById("wifi-pass").textContent).then(function () {
+        var pass = document.getElementById("wifi-pass").textContent;
+        // navigator.clipboard is missing in some in-app browsers and on
+        // insecure origins; writeText can also reject (permission/focus).
+        if (!navigator.clipboard || !navigator.clipboard.writeText) {
+          showCopyError();
+          return;
+        }
+        navigator.clipboard.writeText(pass).then(function () {
+          copyError.hidden = true;
           copyBtn.innerHTML = checkIcon;
           copyBtn.classList.add("copied");
           clearTimeout(copyTimer);
@@ -509,7 +528,7 @@
             copyBtn.innerHTML = copyIcon;
             copyBtn.classList.remove("copied");
           }, 1500);
-        });
+        }, showCopyError);
       });
       // Close the modal once the user follows the confirm link.
       document.getElementById("order-confirm").addEventListener("click", function () {
